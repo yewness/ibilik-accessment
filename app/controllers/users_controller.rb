@@ -7,7 +7,6 @@ post '/users/login' do
 		redirect "/users/#{user.id}"
 	else
 		@notice = "Invalid email/password"
-		redirect "/users"
 		erb :"user/index"
 	end
 end
@@ -29,12 +28,12 @@ end
 
 post '/users' do
 	user = User.create(name: params[:name], email: params[:email], password: params[:password])
-		if user
-			notice = "Your account was created. Please login."
-			redirect "/users?created={notice}"
+		if user.valid?
+			@notice = "Your account was created. Please login."
+			redirect "/users?created=#{@notice}"
 		else
-			notice = user.error.full_messages
-			redirect "/users?error_msg=#{notice}"
+			@notice = user.errors.full_messages
+			redirect "/users/new?error_msg=#{@notice}"
 		end
 end
 
