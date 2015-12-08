@@ -20,6 +20,7 @@ require "sinatra/reloader" if development?
 	# embedded ruby
 require 'erb'
 require 'uri'
+require 'byebug'
 ######################################################################
 
 
@@ -41,6 +42,7 @@ require APP_ROOT.join('config', 'database')
 
 # Setup views (V)
 set :views, File.join(APP_ROOT, "app", "views")
+set :erb, layout: :'static/index'
 
 # Setup helper (H)
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }

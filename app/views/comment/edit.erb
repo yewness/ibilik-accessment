@@ -1,0 +1,14 @@
+<h1>Edit Comment</h1>
+
+<form action="/properties/<%= @comment.property_id %>/comments/<%= @comment.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<label>Answer: </label><br>
+	<textarea name="body" value="<%= @comment.body %>"><%= @comment.body %></textarea><br>
+	<input type="submit" value="Update Answer">
+</form>
+<br>
+
+<form action="/properties/<%= @comment.property_id %>/comments/<%= @comment.id %>" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete"> Are you sure you want to delete the comment?
+</form>

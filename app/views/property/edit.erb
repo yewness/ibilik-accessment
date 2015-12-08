@@ -1,0 +1,10 @@
+<h1>Edit the Listing</h1>
+
+<form action="/properties/<%= @property.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<label>Room Name: </label>
+	<input type="text" name="title" value="<%= @property.title%>"><br>
+	<label>Description: </label>
+	<textarea name="body" value="<%= @property.body%>"><%= @property.body %></textarea><br>
+	<input type="submit" value="Upsell!">
+</form>

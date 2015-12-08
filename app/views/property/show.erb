@@ -1,0 +1,48 @@
+<h1>My Listing</h1>
+<div>
+	<font size="5"><strong><%= @property.title %></strong></font><br>
+		by <a href="/users/<%= @property.user_id%>"><%= @property.user.name %></a> on <%= @property.created_at.strftime("%Y-%m-%d") %><br>
+		<p><pre style="font-family: Georgia; font-size: 12pt"><%= @property.body %></pre></p>
+</div><br>
+
+<div>
+	<% if session[:user_id] == @property.user.id %>
+		<a href="/properties/<%= @property.id %>/edit"><button>Edit your listing</button></a>
+		<form style="display: inline" action="/properties/<%= @property.id %>" method="post">
+			<input type="hidden" name="_method" value="delete">
+			<input type="submit" value="Delete">
+		</form>
+		<a href="/properties/<%= @property.id %>/comments/new"><button>Post comment</button></a>
+	<% else %>
+		<a href="/properties/<%= @property.id %>/bookings/new"><button>Contact for booking</button></a>
+		<a href="/properties/<%= @property.id %>/comments/new"><button>Post comment</button></a>
+	<% end %>
+</div><br>	
+
+<p>
+	<a href="/users/<%= session[:user_id] %>">Go back</a><br>
+	<a href="/properties">See all listing</a>
+</p>
+
+<div>
+	<u><h3> Comments </h3></u>
+	<% if @property.comments.nil? %>
+	<% else %>
+	<% @property.comments.each_with_index do |comment,index| %>
+		<tr>
+		<%= index + 1 %>. <%= comment.body %><br>
+		<div style="margin-left:1em">
+			<font size="2">
+			 by <a href="/users/<%= comment.user_id %>"><%= comment.user.name %></a> on <%= comment.created_at.strftime("%Y-%m-%d") %>
+			</font>
+			<% if session[:user_id] == comment.user_id %>
+				<a href="/properties/<%= comment.property_id %>/comments/<%= comment.id %>/edit"><button>Edit</button></a><br>
+			<% end %>
+		</div>
+		
+		</tr><br><br>
+	<% end %>
+	<% end %>
+</div>
+
+

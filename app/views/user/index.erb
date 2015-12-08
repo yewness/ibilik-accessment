@@ -1,0 +1,14 @@
+<h1>Login</h1>
+
+		<div>
+			<%= @notice %>
+			<form action="/users/login" method="POST">
+				<input type="email" placeholder="Email" name="email"><br>
+				<input type="password" placeholder="Password" name="password"><br>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+
+		<div>
+			Don't have an account? <a href="/users/new">Sign up here!</a>
+		</div>

@@ -1,0 +1,16 @@
+<div>
+	<h1>All Listing</h1>
+	<div> <% count = 0 %>
+		<% Property.all.order(id: :desc).each do |prop| %>
+			<% if current_user.id != prop.user_id %>
+			<tr><%= count + 1%>.
+		    	<font size="4"><strong><a href="/properties/<%= prop.id %>"><%= prop.title %></a></strong></font><br>
+		    	<div style="margin-left:1em">
+		    		by <a href="/users/<%= prop.user_id %>"><%= prop.user.name %></a> on <%= prop.created_at.strftime("%Y-%m-%d") %>
+		    	</div>
+			</tr><br>
+				<% count += 1 %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
